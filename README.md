@@ -51,12 +51,16 @@ Designed for modern GNOME Shell versions (GNOME 45 through 51+ / Ubuntu 24.04 - 
 ## Installation
 
 Run the installation script in the extension folder:
-
+```bash
+git clone https://github.com/gurmeetgupta22/Widgets.git
+cd Widgets
+```
+then
 ```bash
 ./install.sh
 ```
 
-Or manually link the folder:
+Or manually link the folder(not reccomended):
 
 ```bash
 mkdir -p ~/.local/share/gnome-shell/extensions/
