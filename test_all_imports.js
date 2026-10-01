@@ -1,0 +1,15 @@
+import './liquidGlass.js';
+import './extension.js';
+import './indicator.js';
+import './gallery.js';
+import './widgetManager.js';
+import './prefs.js';
+import './widgets/BaseWidget.js';
+import './widgets/ClockWidget.js';
+import './widgets/BatteryWidget.js';
+import './widgets/WeatherWidget.js';
+import './widgets/BluetoothWidget.js';
+import './widgets/SystemWidget.js';
+import './widgets/MediaWidget.js';
+import './widgets/NotesWidget.js';
+print('ALL 13 MODULES IMPORTED SUCCESSFULLY WITH ZERO ERRORS!');

@@ -1,0 +1,17 @@
+{
+  "name": "Widgets",
+  "description": "macOS Tahoe liquid-glass desktop widgets for GNOME Shell: Clock, Weather, Battery, Bluetooth, System Resources, Media Player, Quick Notes, and App Dock.",
+  "uuid": "widgets@desktop.org",
+  "shell-version": [
+    "45",
+    "46",
+    "47",
+    "48",
+    "49",
+    "50",
+    "51"
+  ],
+  "settings-schema": "org.gnome.shell.extensions.widgets",
+  "url": "https://github.com/gurmeetgupta22/Widgets",
+  "version": 1
+}

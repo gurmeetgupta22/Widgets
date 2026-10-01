@@ -1,0 +1,787 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Liquid Glass — macOS Tahoe / iOS-style widgets for GNOME Shell
+   Inspired by liquidglass-kde-widgets: blurred wallpaper, glass tint,
+   top specular, and a thin rim. St/Clutter CSS allows one box-shadow.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Desktop Container */
+.widgets-desktop-container {
+    background-color: transparent;
+}
+
+/* ────────────────────────────────────────────────────────────────────────────
+   BASE WIDGET CARD — Liquid Glass
+   Tint + specular are also applied inline from liquidGlass.js so opacity
+   can be tuned in preferences. These rules are the fallback silhouette.
+   ──────────────────────────────────────────────────────────────────────────── */
+.widget-card {
+    background-color: transparent;
+    border-radius: 32px;
+    padding: 0;
+    color: #ffffff;
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.22);
+    box-shadow: none;
+    transition-duration: 180ms;
+}
+
+.widget-glass-clip,
+.widget-glass-blur,
+.widget-glass-tint {
+    border-radius: 32px;
+}
+
+.widget-glass-content {
+    padding: 14px;
+}
+
+.widget-card.widget-dark-theme {
+    border-color: rgba(255, 255, 255, 0.20);
+    color: #ffffff;
+    box-shadow: none;
+}
+
+.widget-card.widget-light-theme {
+    background-color: transparent;
+    border-color: rgba(255, 255, 255, 0.55);
+    color: #1c1c1e;
+    box-shadow: none;
+}
+
+.widget-card:hover,
+.widget-card:focus,
+.widget-card:active,
+.widget-card.widget-glass-hover,
+.widget-glass-clip:hover,
+.widget-glass-blur:hover,
+.widget-glass-tint:hover,
+.widget-glass-content:hover {
+    background-color: transparent;
+}
+
+.widget-card StEntry,
+.widget-card StEntry:hover,
+.widget-card StEntry:focus,
+.widget-card .notes-textarea,
+.widget-card .notes-textarea:hover,
+.widget-card .notes-textarea:focus {
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.widget-resize-handle {
+    width: 22px;
+    height: 22px;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+.widget-light-theme .widget-resize-handle {
+    background-color: transparent;
+}
+
+.widget-card.edit-mode {
+    border-width: 1.5px;
+    border-color: rgba(10, 132, 255, 0.70);
+}
+
+/* ── Header ── */
+.widget-header {
+    margin-bottom: 8px;
+}
+
+.widget-icon-header {
+    icon-size: 15px;
+    color: rgba(255, 255, 255, 0.55);
+    margin-right: 6px;
+}
+.widget-light-theme .widget-icon-header {
+    color: rgba(0, 0, 0, 0.45);
+}
+
+.widget-title {
+    font-size: 10pt;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.50);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+.widget-light-theme .widget-title {
+    color: rgba(0, 0, 0, 0.40);
+}
+
+/* ── Close button ── */
+.widget-close-btn {
+    border-radius: 12px;
+    width: 22px;
+    height: 22px;
+    background-color: rgba(255, 69, 58, 0.90);
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 9pt;
+    padding: 0;
+    margin: 4px;
+    border: none;
+}
+.widget-close-btn:hover {
+    background-color: #ff453a;
+}
+
+/* ────────────────────────────────────────────────────────────────────────────
+   SIZES
+   ──────────────────────────────────────────────────────────────────────────── */
+.widget-small  { width: 170px; height: 170px; }
+.widget-medium { width: 360px; height: 155px; }
+.widget-large  { width: 360px; height: 340px; }
+
+/* ────────────────────────────────────────────────────────────────────────────
+   CLOCK WIDGET
+   ──────────────────────────────────────────────────────────────────────────── */
+.widget-clock-analog .widget-glass-content {
+    padding: 6px;
+}
+.widget-clock-analog .widget-header {
+    margin-bottom: 0px;
+    height: 0px;
+}
+.clock-analog-canvas-full {
+    margin: 0px;
+}
+
+.clock-time-large {
+    font-size: 30pt;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -1px;
+}
+.widget-light-theme .clock-time-large {
+    color: #1c1c1e;
+}
+
+.clock-seconds {
+    font-size: 15pt;
+    font-weight: 400;
+    color: #0a84ff;
+    margin-left: 4px;
+}
+.clock-ampm {
+    font-size: 10pt;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.50);
+    margin-left: 6px;
+}
+.widget-light-theme .clock-ampm {
+    color: rgba(0, 0, 0, 0.38);
+}
+
+.clock-day {
+    font-size: 11pt;
+    font-weight: 600;
+    color: #ff375f;
+    text-transform: uppercase;
+}
+.clock-date {
+    font-size: 10pt;
+    color: rgba(255, 255, 255, 0.70);
+}
+.widget-light-theme .clock-date {
+    color: rgba(0, 0, 0, 0.55);
+}
+
+/* ────────────────────────────────────────────────────────────────────────────
+   WEATHER WIDGET
+   ──────────────────────────────────────────────────────────────────────────── */
+.weather-temp {
+    font-size: 30pt;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: -1px;
+}
+.widget-light-theme .weather-temp {
+    color: #1c1c1e;
+}
+
+.weather-city {
+    font-size: 11pt;
+    font-weight: 700;
+    color: #ffffff;
+}
+.widget-light-theme .weather-city {
+    color: #1c1c1e;
+}
+
+.weather-condition {
+    font-size: 10pt;
+    color: rgba(255, 255, 255, 0.65);
+}
+.widget-light-theme .weather-condition {
+    color: rgba(0, 0, 0, 0.50);
+}
+
+.weather-icon-large {
+    icon-size: 42px;
+    color: #ffd60a;
+}
+
+.weather-high-low {
+    font-size: 9pt;
+    color: rgba(255, 255, 255, 0.50);
+}
+.widget-light-theme .weather-high-low {
+    color: rgba(0, 0, 0, 0.40);
+}
+
+.weather-stat-label {
+    font-size: 8pt;
+    color: rgba(255, 255, 255, 0.40);
+}
+.widget-light-theme .weather-stat-label {
+    color: rgba(0, 0, 0, 0.35);
+}
+
+.weather-stat-val {
+    font-size: 9pt;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+}
+.widget-light-theme .weather-stat-val {
+    color: rgba(0, 0, 0, 0.75);
+}
+
+/* ────────────────────────────────────────────────────────────────────────────
+   BATTERY WIDGET
+   ──────────────────────────────────────────────────────────────────────────── */
+.battery-devices-row {
+    spacing: 10px;
+}
+.battery-slot-box {
+    width: 70px;
+    spacing: 5px;
+}
+.battery-slot-label {
+    font-size: 12pt;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.3px;
+    text-align: center;
+}
+.widget-light-theme .battery-slot-label {
+    color: #1c1c1e;
+}
+
+/* ────────────────────────────────────────────────────────────────────────────
+   BLUETOOTH WIDGET — nested glass chips
+   ──────────────────────────────────────────────────────────────────────────── */
+.bt-empty-label {
+    font-size: 10pt;
+    color: rgba(255, 255, 255, 0.40);
+    font-style: italic;
+}
+.widget-light-theme .bt-empty-label {
+    color: rgba(0, 0, 0, 0.30);
+}
+
+.bt-device-item {
+    background-color: rgba(255, 255, 255, 0.10);
+    border-radius: 14px;
+    padding: 6px 10px;
+    margin-bottom: 5px;
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.10);
+}
+.widget-light-theme .bt-device-item {
+    background-color: rgba(0, 0, 0, 0.08);
+    border-color: rgba(0, 0, 0, 0.06);
+}
+
+.bt-device-name {
+    font-size: 10pt;
+    font-weight: 600;
+    color: #ffffff;
+}
+.widget-light-theme .bt-device-name {
+    color: #1c1c1e;
+}
+
+.bt-device-status {
+    font-size: 8pt;
+    color: #30d158;
+}
+.bt-device-battery {
+    font-size: 8pt;
+    color: rgba(255, 255, 255, 0.65);
+    margin-left: 4px;
+}
+.widget-light-theme .bt-device-battery {
+    color: rgba(0, 0, 0, 0.55);
+}
+
+/* ────────────────────────────────────────────────────────────────────────────
+   SYSTEM MONITOR — nested glass chips
+   ──────────────────────────────────────────────────────────────────────────── */
+.system-stat-box {
+    background-color: rgba(255, 255, 255, 0.10);
+    border-radius: 16px;
+    padding: 8px 11px;
+    margin: 3px;
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.10);
+}
+.widget-light-theme .system-stat-box {
+    background-color: rgba(0, 0, 0, 0.08);
+    border-color: rgba(0, 0, 0, 0.06);
+}
+
+.system-stat-title {
+    font-size: 8.5pt;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.50);
+    text-transform: uppercase;
+}
+.widget-light-theme .system-stat-title {
+    color: rgba(0, 0, 0, 0.40);
+}
+
+.system-stat-val {
+    font-size: 15pt;
+    font-weight: 700;
+    color: #ffffff;
+}
+.widget-light-theme .system-stat-val {
+    color: #1c1c1e;
+}
+
+.system-meter-bg {
+    background-color: rgba(255, 255, 255, 0.14);
+    border-radius: 5px;
+    height: 5px;
+    margin-top: 4px;
+}
+.widget-light-theme .system-meter-bg {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.system-meter-fill {
+    border-radius: 5px;
+    height: 5px;
+    background-color: #0a84ff;
+}
+
+/* ────────────────────────────────────────────────────────────────────────────
+   MEDIA PLAYER WIDGET
+   ──────────────────────────────────────────────────────────────────────────── */
+.media-container-card {
+    padding: 0;
+}
+
+.media-art-box {
+    border-radius: 18px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.10);
+    min-width: 104px;
+    min-height: 104px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+.widget-light-theme .media-art-box {
+    background-color: rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.media-art-box.media-has-art {
+    background-color: transparent;
+    border: none;
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.40);
+}
+
+.media-art-icon {
+    icon-size: 48px;
+    color: rgba(255, 255, 255, 0.75);
+}
+.widget-light-theme .media-art-icon {
+    color: rgba(0, 0, 0, 0.60);
+}
+
+.media-info-col {
+    padding-left: 12px;
+}
+
+.media-title {
+    font-size: 12.5pt;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 2px;
+}
+.widget-light-theme .media-title {
+    color: #1c1c1e;
+}
+
+.media-artist {
+    font-size: 9.5pt;
+    color: rgba(255, 255, 255, 0.55);
+    margin-bottom: 4px;
+}
+.widget-light-theme .media-artist {
+    color: rgba(0, 0, 0, 0.50);
+}
+
+.media-badge-icon {
+    color: rgba(255, 255, 255, 0.40);
+    margin-left: 6px;
+}
+.widget-light-theme .media-badge-icon {
+    color: rgba(0, 0, 0, 0.35);
+}
+
+.media-controls-row {
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+.media-ctrl-btn {
+    border-radius: 9999px;
+    padding: 0;
+    color: #ffffff;
+    border: none;
+    transition-duration: 120ms;
+}
+.widget-light-theme .media-ctrl-btn {
+    color: #1c1c1e;
+}
+
+.media-ctrl-skip {
+    width: 34px;
+    height: 34px;
+    background-color: transparent;
+    margin: 0 8px;
+    border: none;
+}
+.media-ctrl-skip:hover {
+    background-color: rgba(255, 255, 255, 0.16);
+}
+.widget-light-theme .media-ctrl-skip:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.media-ctrl-play {
+    width: 46px;
+    height: 46px;
+    border-radius: 9999px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    margin: 0 10px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+}
+.media-ctrl-play:hover {
+    background-color: #0a84ff;
+    color: #ffffff;
+}
+.widget-light-theme .media-ctrl-play {
+    border: none;
+    background-color: rgba(0, 0, 0, 0.10);
+    color: #1c1c1e;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+.widget-light-theme .media-ctrl-play:hover {
+    background-color: #0071e3;
+    color: #ffffff;
+}
+
+.media-bottom-box {
+    margin-top: 6px;
+    padding: 0 2px;
+}
+.media-time-row {
+    margin-bottom: 3px;
+}
+
+.media-time-label {
+    font-size: 8pt;
+    color: rgba(255, 255, 255, 0.45);
+}
+.widget-light-theme .media-time-label {
+    color: rgba(0, 0, 0, 0.38);
+}
+
+.media-progress-bg {
+    background-color: rgba(255, 255, 255, 0.14);
+    border-radius: 9999px;
+    height: 4px;
+}
+.widget-light-theme .media-progress-bg {
+    background-color: rgba(0, 0, 0, 0.10);
+}
+
+.media-progress-fill {
+    background-color: rgba(255, 255, 255, 0.90);
+    border-radius: 9999px;
+    height: 4px;
+}
+.widget-light-theme .media-progress-fill {
+    background-color: rgba(0, 0, 0, 0.75);
+}
+.media-playing .media-progress-fill {
+    background-color: #0a84ff;
+}
+
+/* ────────────────────────────────────────────────────────────────────────────
+   QUICK NOTES WIDGET
+   ──────────────────────────────────────────────────────────────────────────── */
+.widget-notes .widget-glass-content {
+    padding: 10px 12px 8px 12px;
+}
+
+.notes-paper-card {
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+}
+.widget-light-theme .notes-paper-card {
+    background-color: transparent;
+    border: none;
+}
+
+.notes-header-bar {
+    margin-bottom: 4px;
+}
+
+.notes-card-title {
+    font-size: 10pt;
+    font-weight: 700;
+    color: #ffd60a;
+}
+.widget-light-theme .notes-card-title {
+    color: #b8860b;
+}
+
+.notes-status-badge {
+    font-size: 8pt;
+    color: rgba(255, 255, 255, 0.40);
+}
+.widget-light-theme .notes-status-badge {
+    color: rgba(0, 0, 0, 0.35);
+}
+
+.notes-hairline-divider {
+    background-color: rgba(255, 255, 255, 0.12);
+    margin-bottom: 4px;
+}
+.widget-light-theme .notes-hairline-divider {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.notes-scrollview {
+    min-height: 48px;
+}
+
+.notes-textarea {
+    font-size: 10pt;
+    color: rgba(255, 255, 255, 0.92);
+    caret-color: #ffd60a;
+    padding: 2px 2px;
+    background-color: transparent;
+    border: none;
+}
+.widget-light-theme .notes-textarea {
+    color: rgba(28, 28, 30, 0.90);
+    caret-color: #0071e3;
+}
+
+.notes-footer-bar {
+    margin-top: 4px;
+    padding-top: 3px;
+    border: none;
+}
+
+.notes-path-label {
+    font-size: 7.5pt;
+    color: rgba(255, 255, 255, 0.30);
+}
+.widget-light-theme .notes-path-label {
+    color: rgba(0, 0, 0, 0.30);
+}
+
+/* ────────────────────────────────────────────────────────────────────────────
+   APP DOCK WIDGET
+   ──────────────────────────────────────────────────────────────────────────── */
+.dock-shelf-container {
+    background-color: transparent;
+    border: none;
+    border-radius: 18px;
+    padding: 4px 2px;
+}
+
+.dock-scroll-area {
+    min-height: 64px;
+}
+
+.dock-icon-wrap {
+    border-radius: 14px;
+    padding: 4px 6px;
+    min-width: 60px;
+    border: none;
+    background-color: transparent;
+    transition-duration: 120ms;
+}
+.dock-icon-wrap:hover {
+    background-color: transparent;
+}
+.widget-light-theme .dock-icon-wrap:hover {
+    background-color: transparent;
+}
+
+.dock-app-icon {
+    margin-bottom: 2px;
+}
+
+.dock-app-label {
+    font-size: 7.5pt;
+    color: rgba(255, 255, 255, 0.80);
+    text-align: center;
+}
+.widget-light-theme .dock-app-label {
+    color: rgba(0, 0, 0, 0.70);
+}
+
+.dock-remove-badge {
+    border-radius: 9999px;
+    width: 18px;
+    height: 18px;
+    background-color: rgba(255, 59, 48, 0.90);
+    color: #ffffff;
+    font-size: 8pt;
+    font-weight: bold;
+    padding: 0;
+    margin-top: 2px;
+    border: none;
+}
+.dock-remove-badge:hover {
+    background-color: #ff3b30;
+}
+
+.dock-empty-hint {
+    font-size: 9pt;
+    color: rgba(255, 255, 255, 0.35);
+    font-style: italic;
+    text-align: center;
+    padding: 8px 0;
+}
+.widget-light-theme .dock-empty-hint {
+    color: rgba(0, 0, 0, 0.30);
+}
+
+.dock-add-btn {
+    border-radius: 9999px;
+    padding: 5px 16px;
+    background-color: rgba(10, 132, 255, 0.22);
+    color: #0a84ff;
+    font-size: 9pt;
+    font-weight: 600;
+    border: none;
+    transition-duration: 120ms;
+}
+.dock-add-btn:hover {
+    background-color: #0a84ff;
+    color: #ffffff;
+}
+.widget-light-theme .dock-add-btn {
+    background-color: rgba(10, 132, 255, 0.15);
+    color: #0071e3;
+}
+.widget-light-theme .dock-add-btn:hover {
+    background-color: #0071e3;
+    color: #ffffff;
+}
+
+.dock-picker-popup {
+    background-color: rgba(20, 22, 30, 0.78);
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.18);
+    border-radius: 24px;
+    padding: 14px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+.dock-picker-title {
+    font-size: 11pt;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.dock-picker-search {
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.10);
+    color: #ffffff;
+    padding: 6px 10px;
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.10);
+}
+
+.dock-picker-row {
+    border-radius: 12px;
+    padding: 5px 8px;
+    transition-duration: 100ms;
+}
+.dock-picker-row:hover {
+    background-color: rgba(255, 255, 255, 0.14);
+}
+.dock-picker-name {
+    font-size: 9.5pt;
+    color: #ffffff;
+}
+
+/* ────────────────────────────────────────────────────────────────────────────
+   WIDGET GALLERY
+   ──────────────────────────────────────────────────────────────────────────── */
+.widget-gallery-window {
+    background-color: rgba(20, 22, 30, 0.72);
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.18);
+    border-radius: 32px;
+    padding: 24px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+}
+
+.gallery-title {
+    font-size: 15pt;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 4px;
+}
+.gallery-subtitle {
+    font-size: 10pt;
+    color: rgba(255, 255, 255, 0.50);
+    margin-bottom: 16px;
+}
+
+.gallery-card {
+    background-color: rgba(255, 255, 255, 0.10);
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.10);
+    border-radius: 18px;
+    padding: 13px;
+    margin: 7px;
+    transition-duration: 140ms;
+}
+.gallery-card:hover {
+    background-color: rgba(255, 255, 255, 0.16);
+    border-color: rgba(255, 255, 255, 0.18);
+}
+
+.gallery-add-btn {
+    background-color: rgba(10, 132, 255, 0.92);
+    color: #ffffff;
+    border-radius: 14px;
+    padding: 6px 14px;
+    font-weight: 600;
+    font-size: 9.5pt;
+    border: none;
+}
+.gallery-add-btn:hover {
+    background-color: #0071e3;
+}

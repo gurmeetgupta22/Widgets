@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="widgets">
+  <schema id="org.gnome.shell.extensions.widgets" path="/org/gnome/shell/extensions/widgets/">
+    <key name="enabled-widgets" type="as">
+      <default>['clock', 'weather', 'battery', 'bluetooth', 'system']</default>
+      <summary>Enabled Widgets</summary>
+      <description>List of enabled widget IDs to display on the desktop</description>
+    </key>
+    <key name="widget-positions" type="s">
+      <default>'{}'</default>
+      <summary>Widget Positions</summary>
+      <description>JSON object storing coordinates (x, y) for each widget</description>
+    </key>
+    <key name="lock-positions" type="b">
+      <default>false</default>
+      <summary>Lock Positions</summary>
+      <description>Whether dragging widgets is locked</description>
+    </key>
+    <key name="desktop-layer" type="s">
+      <default>'desktop'</default>
+      <summary>Desktop Layer</summary>
+      <description>Where widgets are attached: 'desktop' (behind windows) or 'top' (above windows)</description>
+    </key>
+    <key name="glass-opacity" type="d">
+      <default>0.55</default>
+      <summary>Glass Opacity</summary>
+      <description>Liquid glass tint strength (0.15 to 0.95). Lower values show more of the blurred wallpaper.</description>
+    </key>
+    <key name="glass-appearance" type="s">
+      <default>'system'</default>
+      <summary>Liquid Glass Appearance</summary>
+      <description>Glass theme: 'system', 'dark', or 'light'. Liquid glass is kept in all modes.</description>
+    </key>
+    <key name="widget-sizes" type="s">
+      <default>'{}'</default>
+      <summary>Widget Sizes</summary>
+      <description>JSON object storing width and height for each resized widget</description>
+    </key>
+    <key name="clock-style" type="s">
+      <default>'analog-dark'</default>
+      <summary>Clock Style</summary>
+      <description>Clock display style: 'digital', 'analog-light', or 'analog-dark'</description>
+    </key>
+    <key name="clock-show-seconds" type="b">
+      <default>true</default>
+      <summary>Show Seconds in Clock</summary>
+      <description>Whether to show seconds</description>
+    </key>
+    <key name="weather-city" type="s">
+      <default>'Auto'</default>
+      <summary>Weather City</summary>
+      <description>City name for weather or 'Auto' for geolocation</description>
+    </key>
+    <key name="weather-units" type="s">
+      <default>'celsius'</default>
+      <summary>Weather Temperature Units</summary>
+      <description>'celsius' or 'fahrenheit'</description>
+    </key>
+    <key name="notes-content" type="s">
+      <default>'Desktop Notes\n• Click here to edit\n• Press Esc or unfocus to save'</default>
+      <summary>Desktop Notes Content</summary>
+      <description>Persisted text inside the desktop notes widget</description>
+    </key>
+    <key name="dock-pinned-apps" type="s">
+      <default>'[]'</default>
+      <summary>Dock Pinned Apps</summary>
+      <description>JSON array of .desktop file IDs pinned to the App Container Dock widget</description>
+    </key>
+  </schema>
+</schemalist>
